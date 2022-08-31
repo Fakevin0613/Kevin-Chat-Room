@@ -1,10 +1,4 @@
 import React from 'react'
-<<<<<<< HEAD
-
-const Login = () => {
-  return (
-    <div>Login</div>
-=======
 import { Typography } from '@mui/material'
 import LoginStyle from './LoginStyle'
 import { Link } from 'react-router-dom'
@@ -39,7 +33,6 @@ const Login = () => {
       <Typography variant='h7' color="#500979">New User? <Link to='/register'>Register</Link></Typography>
 
     </div>
->>>>>>> 67c4d56f (login page done)
   )
 }
 
