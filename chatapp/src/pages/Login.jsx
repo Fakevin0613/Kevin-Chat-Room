@@ -18,7 +18,7 @@ const Login = () => {
       <input
         className={classes.Input}
         type="text"
-        name='UserName'
+        name='userName'
         placeholder='UserName'
         onChange={handleWrite}
       />
@@ -26,7 +26,7 @@ const Login = () => {
         className={classes.Input}
         type="password"
         placeholder='Password'
-        name='Password'
+        name='password'
         onChange={handleWrite}
       />
       <button className={classes.Button} onClick={handleSubmit}>Login</button>
