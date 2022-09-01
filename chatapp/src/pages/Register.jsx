@@ -29,17 +29,14 @@ const Register = () => {
 
     const handleWrite = (e) => {
         setCredential({ ...credentials, [e.target.name]: e.target.value })
-        console.log(credentials)
     }
 
     const handleConfirmed = (e) => {
         setConfirmpassword(e.target.value);
-        console.log(confirmPassword)
     }
 
     const handleSubmit = async (e) => {
         if(validate()){
-            console.log('in validation', registerRoute)
             const { data } = await axios.post(registerRoute, credentials);
             if(data.status === false){
                 toast.error(data.msg, toastOptions);
@@ -111,7 +108,7 @@ const Register = () => {
                     onChange={handleConfirmed}
                 />
                 <button className={classes.Button} onClick={handleSubmit}>Let's go!</button>
-                <Typography variant='h7' color="#500979">Already have an account? <Link to='/'>Login here</Link></Typography>
+                <Typography variant='h7' color="#500979">Already have an account? <Link className={classes.Link} to='/'>Login here</Link></Typography>
             </div>
             <ToastContainer />
         </>

@@ -42,6 +42,10 @@ const RegisterStyle = makeStyles({
         borderRadius: "5px",
         transition: ".2s ease-in",
         cursor: "pointer",
+    },
+    Link: {
+        textDecoration: "none",
+        color: "#00d4ff",
     }
 })
 
