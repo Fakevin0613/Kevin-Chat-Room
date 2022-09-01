@@ -42,8 +42,10 @@ const Register = () => {
                 toast.error(data.msg, toastOptions);
             }
             if(data.status === true){
-                console.log(JSON.stringify(data.user))
-                localStorage.setItem('chat-app-user', JSON.stringify(data.user));
+                localStorage.setItem('chat-app-user', JSON.stringify({
+                    username: credentials.username,
+                    password: credentials.password,
+                }));
                 navigate("/");
             }
             

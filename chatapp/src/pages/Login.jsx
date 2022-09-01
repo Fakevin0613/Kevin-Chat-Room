@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from "react-toastify"
 import axios from 'axios'
 import { loginRoute } from '../api/ApiRoutes';
+import { useEffect } from 'react';
 const Login = () => {
 
   const classes = LoginStyle();
@@ -15,6 +16,14 @@ const Login = () => {
     username: "",
     password: "",
   });
+
+  useEffect(() => {
+    if(localStorage.getItem('chat-app-user')){
+      setLoginInfo({...loginInfo,
+        username: JSON.parse(localStorage.getItem('chat-app-user')).username,
+      })
+    }
+  }, [])
 
   const toastOptions = {
     position: "bottom-right",
@@ -51,7 +60,7 @@ const Login = () => {
       }
       if(data.status === true){
           console.log(JSON.stringify(data.user))
-          localStorage.setItem('chat-app-user', JSON.stringify(data.user));
+          localStorage.setItem('chat-app-user-logined', JSON.stringify(data.user));
           navigate("/chat");
       }
     }
@@ -68,6 +77,7 @@ const Login = () => {
           type="text"
           name='username'
           placeholder='Username'
+          value={loginInfo.username}
           onChange={handleWrite}
         />
         <input
@@ -75,6 +85,7 @@ const Login = () => {
           type="password"
           placeholder='Password'
           name='password'
+          value={loginInfo.password}
           onChange={handleWrite}
         />
         <button className={classes.Button} onClick={handleSubmit}>Login</button>

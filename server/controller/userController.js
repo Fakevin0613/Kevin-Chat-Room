@@ -19,8 +19,7 @@ module.exports.register = async (req, res, next) => {
             email,
             username,
             password: encodePassword,
-        });
-        delete user.password;
+        });        
         return res.json({ status: true, user });
     } catch (e) {
         next(e);
@@ -44,7 +43,6 @@ module.exports.login = async (req, res, next) => {
             console.log(user.password)
             return res.json({ msg: "Password Incorrect! Please try again!", status: false });
         }
-        delete user.password;
         return res.json({ status: true, user });
     } catch (e) {
         next(e);
