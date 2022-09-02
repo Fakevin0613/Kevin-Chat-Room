@@ -1,17 +1,23 @@
 import { makeStyles } from "@mui/styles";
 
 const LoginStyle = makeStyles({
+    Overall:{
+        margin: "auto",
+        verticalAlign: "middle",
+        display: "flex",
+        justifyContent: "center",
+    },
     Box : {
         margin: "0",
         padding: "0",
         height: "400px",
-        width: "350px",
+        width: "300px",
         boxShadow: "5px 10px 20px #000",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        gap: "2rem",
+        gap: "2.5vh",
         borderRadius: "30px",
         userSelect: "none",
         background: "#fff",
@@ -28,7 +34,7 @@ const LoginStyle = makeStyles({
         borderRadius: "5px",
     },
     Button: {
-        width: "60%",
+        width: "50%",
         height: "40px",
         margin: "10px auto",
         justifyContent: "center",
@@ -40,7 +46,6 @@ const LoginStyle = makeStyles({
         outline: "none",
         border: "none",
         borderRadius: "5px",
-        transition: ".2s ease-in",
         cursor: "pointer",
     },
     Link: {

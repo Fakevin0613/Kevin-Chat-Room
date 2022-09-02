@@ -76,7 +76,7 @@ const Register = () => {
 
     const classes = RegisterStyle();
     return (
-        <>
+        <div className={classes.Overall}>
             <div className={classes.Box}>
                 <Typography variant='h4' color="#500979">
                     Register
@@ -113,7 +113,7 @@ const Register = () => {
                 <Typography variant='h7' color="#500979">Already have an account? <Link className={classes.Link} to='/'>Login here</Link></Typography>
             </div>
             <ToastContainer />
-        </>
+        </div>
 
         
 

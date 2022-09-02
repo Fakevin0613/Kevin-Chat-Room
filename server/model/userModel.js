@@ -16,7 +16,6 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        min: 8,
     },
     isAvatarImageSet: {
         type: Boolean,
@@ -25,7 +24,17 @@ const userSchema = new mongoose.Schema({
     avatar: {
         type: String,
         default: "",
+    },
+    gender: {
+        type: String,
+        default: "other",
+    },
+    aboutme: {
+        type: String,
+        defaule: "",
+        max: 300,
     }
+
 });
 
 module.exports = User = mongoose.model('user', userSchema)

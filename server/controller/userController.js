@@ -49,3 +49,22 @@ module.exports.login = async (req, res, next) => {
     }
 
 };
+
+module.exports.setpersonal = async (req, res, next) => {
+    try {
+        const userId = req.params.id;
+        const avatar = req.body.avatar;
+        const gender = req.body.gender;
+        const aboutme = req.body.aboutme;
+        const user = await User.findByIdAndUpdate(userId, {
+            isAvatarImageSet: true,
+            avatar: avatar,
+            gender: gender,
+            aboutme: aboutme,
+        }, { new: true })
+        return res.json({ status: true, user });
+    } catch (e) {
+        next(e);
+    }
+
+};

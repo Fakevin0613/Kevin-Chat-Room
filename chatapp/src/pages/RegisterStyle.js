@@ -1,17 +1,23 @@
 import { makeStyles } from "@mui/styles";
 
 const RegisterStyle = makeStyles({
+    Overall:{
+        margin: "auto",
+        verticalAlign: "middle",
+        display: "flex",
+        justifyContent: "center",
+    },
     Box : {
         margin: "0",
         padding: "0",
         height: "600px",
-        width: "350px",
+        width: "400px",
         boxShadow: "5px 10px 20px #000",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        gap: "2rem",
+        gap: "2.5vh",
         borderRadius: "30px",
         userSelect: "none",
         background: "#fff",

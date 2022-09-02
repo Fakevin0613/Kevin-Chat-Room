@@ -61,13 +61,18 @@ const Login = () => {
       if(data.status === true){
           console.log(JSON.stringify(data.user))
           localStorage.setItem('chat-app-user-logined', JSON.stringify(data.user));
-          navigate("/chat");
+          if(data.user.isAvatarImageSet === false){
+            navigate("/setpersonal");
+          }
+          else{
+            navigate("/chat");
+          }
       }
     }
   }
 
   return (
-    <>
+    <div className={classes.Overall}>
       <div className={classes.Box}>
         <Typography variant='h4' color="#500979">
           Login
@@ -92,7 +97,7 @@ const Login = () => {
         <Typography variant='h7' color="#500979">New User? <Link className={classes.Link} to='/register'>Register</Link></Typography>
       </div>
       <ToastContainer />
-    </>
+    </div>
 
   )
 }
