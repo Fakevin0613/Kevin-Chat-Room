@@ -6,7 +6,6 @@ const ChatStyle = makeStyles({
         width: "100vw",
         display: "grid",
         gridTemplateColumns: "30% 70%",
-        backgroundColor: "#00d4ff",
     }
 });
 

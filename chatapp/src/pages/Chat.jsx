@@ -5,6 +5,7 @@ import { userContactRoute, userFriendsRoute } from '../api/ApiRoutes';
 import Contacts from '../components/Contacts';
 import Friends from '../components/Friends'
 import { useNavigate } from 'react-router-dom'
+import BottomBar from '../components/BottomBar';
 
 const Chat = () => {
   const classes = ChatStyle();
@@ -47,6 +48,7 @@ const Chat = () => {
       <div>
         <Contacts contacts={allContacts} />
         <Friends friends={allFriends} current={currentUser} setChatter={setChatter} />
+        <BottomBar current = {currentUser}/>
       </div>
 
     </div>

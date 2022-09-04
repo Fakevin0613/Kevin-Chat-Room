@@ -13,7 +13,7 @@ const Friends = ({ friends, current, setChatter }) => {
 
     return (
         <>
-            <List sx={{ height: "40%", bgcolor: "#F5F5F5", borderRadius: "1vh", margin: "2vh", overflow: "auto", userSelect: 'none' }}
+            <List sx={{ height: "40vh", bgcolor: "#F5F5F5", borderRadius: "1vh", margin: "2vh", overflow: "auto", userSelect: 'none' }}
                 subheader={
                     <ListSubheader component="div" id="nested-list-subheader" sx={{ fontSize: "22px" }}>
                         Friends
