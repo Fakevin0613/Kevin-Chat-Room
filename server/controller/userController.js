@@ -66,5 +66,15 @@ module.exports.setpersonal = async (req, res, next) => {
     } catch (e) {
         next(e);
     }
+};
 
+module.exports.getContacts = async (req, res, next) => {
+    try {
+        const users = await User.find({_id:{$ne:req.params.id}}).select([
+            "email", "username", "avatar", "id",
+        ]);
+        return res.json(users);
+    } catch (e) {
+        next(e);
+    }
 };

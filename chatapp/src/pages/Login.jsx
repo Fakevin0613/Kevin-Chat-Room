@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 const Login = () => {
 
   const classes = LoginStyle();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [loginInfo, setLoginInfo] = useState({
     username: "",
@@ -61,6 +61,9 @@ const Login = () => {
       if(data.status === true){
           console.log(JSON.stringify(data.user))
           localStorage.setItem('chat-app-user-logined', JSON.stringify(data.user));
+          localStorage.setItem('chat-app-user', JSON.stringify({
+            username: loginInfo.username,
+        }));
           if(data.user.isAvatarImageSet === false){
             navigate("/setpersonal");
           }
