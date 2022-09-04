@@ -112,24 +112,24 @@ const Personal = () => {
                 <FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel>
                 <div>
                     <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group">
-                        <FormControlLabel value="male" control={<Radio sx={{
+                        <FormControlLabel value="Male" control={<Radio sx={{
                             color: '#500979',
                             '&.Mui-checked': {
                                 color: '#500979',
                             },
-                        }} />} label="Male" onChange={toogleGender} checked={gender === "male"} />
-                        <FormControlLabel value="female" control={<Radio sx={{
+                        }} />} label="Male" onChange={toogleGender} checked={gender === "Male"} />
+                        <FormControlLabel value="Female" control={<Radio sx={{
                             color: '#500979',
                             '&.Mui-checked': {
                                 color: '#500979',
                             },
-                        }} />} label="Female" onChange={toogleGender} checked={gender === "female"} />
-                        <FormControlLabel value="other" control={<Radio sx={{
+                        }} />} label="Female" onChange={toogleGender} checked={gender === "Female"} />
+                        <FormControlLabel value="Other" control={<Radio sx={{
                             color: '#500979',
                             '&.Mui-checked': {
                                 color: '#500979',
                             },
-                        }} />} label="Other" onChange={toogleGender} checked={gender === "other"} />
+                        }} />} label="Other" onChange={toogleGender} checked={gender === "Other"} />
                     </RadioGroup>
                 </div>
                 <FormLabel id="demo-row-radio-buttons-group-label">About Me:</FormLabel>

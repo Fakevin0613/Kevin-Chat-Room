@@ -27,13 +27,15 @@ const userSchema = new mongoose.Schema({
     },
     gender: {
         type: String,
-        default: "other",
+        default: "Other",
     },
     aboutme: {
         type: String,
-        defaule: "",
+        default: "",
         max: 300,
-    }
+    },
+    requestList: [mongoose.Schema.Types.ObjectId],
+    friendList: [mongoose.Schema.Types.ObjectId],
 
 });
 

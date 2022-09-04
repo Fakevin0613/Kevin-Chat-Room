@@ -3,7 +3,6 @@ const brcrypt = require("bcrypt");
 
 module.exports.register = async (req, res, next) => {
     try {
-        console.log(req.body);
         const { username, email, password } = req.body;
         const userCheck = await User.findOne({ username });
         const emailCheck = await User.findOne({ email });
@@ -29,10 +28,7 @@ module.exports.register = async (req, res, next) => {
 
 module.exports.login = async (req, res, next) => {
     try {
-        console.log(req.body);
         const { username, password } = req.body;
-        console.log(username);
-        console.log(password);
         const user = await User.findOne({ username });
         if (!user) {
             return res.json({ msg: "User does not exist! Please try again!", status: false });
@@ -56,12 +52,19 @@ module.exports.setpersonal = async (req, res, next) => {
         const avatar = req.body.avatar;
         const gender = req.body.gender;
         const aboutme = req.body.aboutme;
-        const user = await User.findByIdAndUpdate(userId, {
+        const result = await User.findByIdAndUpdate(userId, {
             isAvatarImageSet: true,
             avatar: avatar,
             gender: gender,
             aboutme: aboutme,
         }, { new: true })
+
+        const user = await User.findOneAndUpdate(
+            {_id: userId},
+            { $addToSet: {friendList: userId}},
+            { new: true }
+        )
+        console.log(user)
         return res.json({ status: true, user });
     } catch (e) {
         next(e);
@@ -70,11 +73,66 @@ module.exports.setpersonal = async (req, res, next) => {
 
 module.exports.getContacts = async (req, res, next) => {
     try {
-        const users = await User.find({_id:{$ne:req.params.id}}).select([
-            "email", "username", "avatar", "id",
+        const currentUser = await User.findById(req.params.id);
+        const users = await User.find({ _id: { $not: { $eq: currentUser.friendList }}}).select([
+            "email", "username", "avatar", "id", "gender"
         ]);
         return res.json(users);
     } catch (e) {
         next(e);
     }
 };
+
+module.exports.getFriends = async (req, res, next) => {
+    try {
+        const currentUser = await User.findById(req.params.id);
+        const users = await User.find({$and: [{_id: {$ne: req.params.id}},{ _id: { $eq: currentUser.friendList }}]}).select([
+            "email", "username", "avatar", "id", "gender"
+        ]);
+        return res.json(users);
+    } catch (e) {
+        next(e);
+    }
+};
+
+module.exports.setRequest = async (req, res, next) => {
+    try {
+        console.log(req.body);
+        const targetId = req.body.id;
+        const userId = req.params.id
+        const result = await User.findOneAndUpdate(
+            {_id: targetId},
+            { $addToSet: {requestList: userId}},
+            { new: true }
+        )
+        return res.json({ status: true, result });
+    } catch (e) {
+        next(e);
+    }
+}
+
+module.exports.setAccept = async (req, res, next) => {
+    try {
+        console.log(req.body);
+        const targetId = req.body.id;
+        const userId = req.params.id
+        const resultRemove = await User.findOneAndUpdate(
+            {_id: userId},
+            { $pull: {requestList: targetId}},
+            { new: true }
+        )
+        const resultAdd = await User.findOneAndUpdate(
+            {_id: userId},
+            { $addToSet: {friendList: targetId}},
+            { new: true }
+        )
+        const resultAddBack = await User.findOneAndUpdate(
+            {_id: targetId},
+            { $addToSet: {friendList: userId}},
+            { new: true }
+        )
+        return res.json({ status: true, resultRemove, resultAdd, resultAddBack });
+    } catch (e) {
+        next(e);
+    }
+}
