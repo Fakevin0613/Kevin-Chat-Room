@@ -28,7 +28,7 @@ const Contacts = ({ contacts, current }) => {
     }
 
     const addFriend = async (currentUser, targetUser) => {
-        const { data } = await axios.post(`${userRequestRoute}/${current}`, {id: targetUser});
+        const { data } = await axios.post(`${userRequestRoute}/${currentUser}`, {id: targetUser});
         if (data.status === false) {
             console.error(data.error)
         }
@@ -39,7 +39,7 @@ const Contacts = ({ contacts, current }) => {
 
     return (
         <>
-            <List sx={{ height: "40vh", bgcolor: "#F5F5F5", borderRadius: "1vh", margin: "2vh", overflow: "auto", userSelect: 'none' }}
+            <List sx={{ minWidth: "250px", height: "40vh", bgcolor: "#F5F5F5", borderRadius: "1vh", margin: "2vh", overflow: "auto", userSelect: 'none' }}
                 subheader={
                     <ListSubheader component="div" id="nested-list-subheader" sx={{ fontSize: "22px" }}>
                         Explore

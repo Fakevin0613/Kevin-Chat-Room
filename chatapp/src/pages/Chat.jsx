@@ -6,11 +6,12 @@ import Contacts from '../components/Contacts';
 import Friends from '../components/Friends'
 import { useNavigate } from 'react-router-dom'
 import BottomBar from '../components/BottomBar';
+import Welcome from '../components/Welcome';
 
 const Chat = () => {
   const classes = ChatStyle();
   const navigate = useNavigate();
-  const currentUser = JSON.parse(localStorage.getItem('chat-app-user-logined'));
+  const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('chat-app-user-logined')));
 
   const [currentChatter, setChatter] = useState(null);
   const [allContacts, setContacts] = useState([]);
@@ -40,18 +41,25 @@ const Chat = () => {
 
     };
     fetchContact()
-  }, [])
+  }, [currentUser])
 
-  const handleChatterChange = (chat) => {
-    setChatter(chat)
+  const handleAddFriend = (something) => {
+    setCurrentUser(something)
+  }
+
+  const handleSetChatter= (something) => {
+    setChatter(something)
   }
 
   return (
     <div className={classes.Container}>
       <div>
         <Contacts contacts={allContacts} current={currentUser._id} />
-        <Friends friends={allFriends} requests={allRequests} current={currentUser} setChatter={setChatter} />
+        <Friends friends={allFriends} requests={allRequests} current={currentUser._id} setChatter={handleSetChatter} setCurrent={handleAddFriend} />
         <BottomBar current = {currentUser}/>
+      </div>
+      <div>
+        <Welcome/>
       </div>
 
     </div>

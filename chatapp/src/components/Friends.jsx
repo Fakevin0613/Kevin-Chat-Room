@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import CheckIcon from '@mui/icons-material/Check';
-import { List, ListItem, ListSubheader, ListItemText, ListItemAvatar, ListItemButton, Typography, Avatar, Divider } from '@mui/material'
+import { List, ListItem, ListSubheader, ListItemText, ListItemAvatar, ListItemButton, Typography, Avatar, Divider, IconButton } from '@mui/material'
 import FriendsStyle from './FriendsStyle'
 import FemaleIcon from '@mui/icons-material/Female';
 import MaleIcon from '@mui/icons-material/Male';
 import TransgenderIcon from '@mui/icons-material/Transgender';
+import axios from 'axios';
+import { userAcceptRoute } from '../api/ApiRoutes';
 
-const Friends = ({ friends, requests, current, setChatter }) => {
+const Friends = ({ friends, requests, current, setChatter, setCurrent }) => {
     const classes = FriendsStyle()
     const [currentSelected, setCurrentSelected] = useState(null);
 
@@ -27,9 +29,20 @@ const Friends = ({ friends, requests, current, setChatter }) => {
         }
     }
 
+    const acceptFriend = async (currentUser, targetUser) => {
+        const { data } = await axios.post(`${userAcceptRoute}/${currentUser}`, {id: targetUser});
+        if (data.status === false) {
+            console.error(data.error)
+        }
+        if (data.status === true) {
+            localStorage.setItem('chat-app-user-logined', JSON.stringify(data.resultAdd));
+            setCurrent(data.resultAdd)
+        }
+    }
+
     return (
         <>
-            <List sx={{ height: "40vh", bgcolor: "#F5F5F5", borderRadius: "1vh", margin: "2vh", overflow: "auto", userSelect: 'none' }}
+            <List sx={{ minWidth: "250px", height: "40vh", bgcolor: "#F5F5F5", borderRadius: "1vh", margin: "2vh", overflow: "auto", userSelect: 'none' }}
                 subheader={
                     <ListSubheader component="div" id="nested-list-subheader" sx={{ fontSize: "22px" }}>
                         Friends
@@ -43,9 +56,9 @@ const Friends = ({ friends, requests, current, setChatter }) => {
                         >
                             <ListItem alignItems="flex-start"
                                 secondaryAction={
-                                    <button className={classes.addButton}>
+                                    <IconButton edge="end" className={classes.addButton} onClick={(e) => {acceptFriend(current, request._id)}}>
                                         <CheckIcon/>
-                                    </button>
+                                    </IconButton>
                                 }>
                                 <ListItemAvatar>
                                     <Avatar alt={`${request.username}`} src={`${request.avatar}`} />
@@ -76,7 +89,7 @@ const Friends = ({ friends, requests, current, setChatter }) => {
                                     </ListItemAvatar>
                                     <ListItemText
                                         primary={`${friend.username}`}
-                                        secondary={`${friend.gender}`}
+                                        secondary={`ToDo`}
                                     />
                                 </ListItemButton>
 
