@@ -13,7 +13,6 @@ const BottomBar = ({ current }) => {
           <Avatar alt={`${current.username}`} src={`${current.avatar}`} />
           <Typography>{current.username}</Typography>
           </div>
-          
           <IconButton edge="end" aria-label="delete">
             <LogoutIcon/>
           </IconButton>

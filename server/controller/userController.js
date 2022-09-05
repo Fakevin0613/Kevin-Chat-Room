@@ -74,9 +74,10 @@ module.exports.setpersonal = async (req, res, next) => {
 module.exports.getContacts = async (req, res, next) => {
     try {
         const currentUser = await User.findById(req.params.id);
-        const users = await User.find({ _id: { $not: { $eq: currentUser.friendList }}}).select([
+        const users = await User.find({$nor: [{_id: currentUser.friendList }, {_id: currentUser.requestList }]}).select([
             "email", "username", "avatar", "id", "gender"
         ]);
+        console.log(currentUser.requestList)
         return res.json(users);
     } catch (e) {
         next(e);
@@ -86,7 +87,19 @@ module.exports.getContacts = async (req, res, next) => {
 module.exports.getFriends = async (req, res, next) => {
     try {
         const currentUser = await User.findById(req.params.id);
-        const users = await User.find({$and: [{_id: {$ne: req.params.id}},{ _id: { $eq: currentUser.friendList }}]}).select([
+        const users = await User.find({$and: [{_id: {$ne: req.params.id}},{ _id: currentUser.friendList }]}).select([
+            "email", "username", "avatar", "id", "gender"
+        ]);
+        return res.json(users);
+    } catch (e) {
+        next(e);
+    }
+};
+
+module.exports.getRequests = async (req, res, next) => {
+    try {
+        const currentUser = await User.findById(req.params.id);
+        const users = await User.find({_id: currentUser.requestList}).select([
             "email", "username", "avatar", "id", "gender"
         ]);
         return res.json(users);
