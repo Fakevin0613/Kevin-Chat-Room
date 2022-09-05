@@ -7,6 +7,7 @@ import Friends from '../components/Friends'
 import { useNavigate } from 'react-router-dom'
 import BottomBar from '../components/BottomBar';
 import Welcome from '../components/Welcome';
+import ChatBox from '../components/ChatBox';
 
 const Chat = () => {
   const classes = ChatStyle();
@@ -59,7 +60,10 @@ const Chat = () => {
         <BottomBar current = {currentUser}/>
       </div>
       <div>
-        <Welcome/>
+        {currentChatter === null ? 
+        <Welcome/> : <ChatBox current = {currentUser}/>
+      }
+        
       </div>
 
     </div>
