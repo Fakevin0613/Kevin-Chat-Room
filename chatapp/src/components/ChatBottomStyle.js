@@ -10,6 +10,7 @@ const ChatBottomStyle = makeStyles({
         flexDirection: "row",
         margin: "1vh",
         alignItems: "center",
+        gap: "15px",
         justifyContent: "space-between"
     },
 });

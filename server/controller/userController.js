@@ -36,7 +36,6 @@ module.exports.login = async (req, res, next) => {
 
         const isValid = await brcrypt.compare(password, user.password)
         if(!isValid){
-            console.log(user.password)
             return res.json({ msg: "Password Incorrect! Please try again!", status: false });
         }
         return res.json({ status: true, user });
@@ -64,7 +63,6 @@ module.exports.setpersonal = async (req, res, next) => {
             { $addToSet: {friendList: userId}},
             { new: true }
         )
-        console.log(user)
         return res.json({ status: true, user });
     } catch (e) {
         next(e);
@@ -77,7 +75,6 @@ module.exports.getContacts = async (req, res, next) => {
         const users = await User.find({$nor: [{_id: currentUser.friendList }, {_id: currentUser.requestList }]}).select([
             "email", "username", "avatar", "id", "gender"
         ]);
-        console.log(currentUser.requestList)
         return res.json(users);
     } catch (e) {
         next(e);
@@ -110,7 +107,6 @@ module.exports.getRequests = async (req, res, next) => {
 
 module.exports.setRequest = async (req, res, next) => {
     try {
-        console.log(req.body);
         const targetId = req.body.id;
         const userId = req.params.id
         const result = await User.findOneAndUpdate(
@@ -126,7 +122,6 @@ module.exports.setRequest = async (req, res, next) => {
 
 module.exports.setAccept = async (req, res, next) => {
     try {
-        console.log(req.body);
         const targetId = req.body.id;
         const userId = req.params.id
         const resultRemove = await User.findOneAndUpdate(

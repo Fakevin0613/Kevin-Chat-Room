@@ -32,9 +32,6 @@ const Contacts = ({ contacts, current }) => {
         if (data.status === false) {
             console.error(data.error)
         }
-        if (data.status === true) {
-            console.log(data.result)
-        }
     }
 
     return (
