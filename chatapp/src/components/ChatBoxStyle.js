@@ -6,8 +6,6 @@ const ChatBoxStyle = makeStyles({
         userSelect: "none",
         display: "flex",
         flexDirection: "Column",
-        alignItems: "center",
-        justifyContent: "center",
     },
 })
 

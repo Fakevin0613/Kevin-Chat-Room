@@ -24,12 +24,12 @@ const Personal = () => {
         draggable: true,
         theme: "light"
     };
-
+    const user = JSON.parse(localStorage.getItem('chat-app-user-logined'))
     const defaultAvatar = createAvatar(style, { seed: JSON.parse(localStorage.getItem('chat-app-user-logined')).username, dataUri: true });
 
-    const [preview, setPreview] = useState(defaultAvatar);
-    const [gender, setGender] = useState(JSON.parse(localStorage.getItem('chat-app-user-logined')).gender);
-    const [aboutme, setAboutMe] = useState("");
+    const [preview, setPreview] = useState(user.avatar === "" ? defaultAvatar : user.avatar);
+    const [gender, setGender] = useState(user.gender);
+    const [aboutme, setAboutMe] = useState(user.aboutme);
 
     const onClose = () => {
         setPreview(defaultAvatar);

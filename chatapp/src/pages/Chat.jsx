@@ -61,7 +61,7 @@ const Chat = () => {
       </div>
       <div>
         {currentChatter === null ? 
-        <Welcome/> : <ChatBox current = {currentUser}/>
+        <Welcome/> : <ChatBox current = {currentUser} currentChatter = {currentChatter}/>
       }
         
       </div>

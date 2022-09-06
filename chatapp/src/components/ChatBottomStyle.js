@@ -1,8 +1,8 @@
 import { makeStyles } from "@mui/styles";
 
 
-const ChatTopStyle = makeStyles({
-    Top: {
+const ChatBottomStyle = makeStyles({
+    Bottom: {
         paddingLeft: "1vw",
         paddingRight: "1vw",
         userSelect: "none",
@@ -12,12 +12,6 @@ const ChatTopStyle = makeStyles({
         alignItems: "center",
         justifyContent: "space-between"
     },
-    AvatarName: {
-        display: "flex",
-        flexDirection: "row",
-        gap: "1vw",
-        alignItems: "center",
-    }
 });
 
-export default ChatTopStyle;
+export default ChatBottomStyle;
