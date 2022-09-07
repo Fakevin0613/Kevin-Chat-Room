@@ -6,7 +6,7 @@ const messageRoutes = require('./routes/messageRoute')
 const socket = require('socket.io')
 require('dotenv').config()
 
-const hostname = 'fakevin666.com';
+const hostname = '208.109.26.191';
 const port = 3000;
 
 
