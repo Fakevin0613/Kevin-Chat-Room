@@ -1,4 +1,4 @@
-export const host = "http(s)://kevinschatroom.herokuapp.com"
+export const host = "http://kevinschatroom.herokuapp.com"
 export const registerRoute = `${host}/api/auth/register`;
 export const loginRoute = `${host}/api/auth/login`;
 export const avatarRoute = `${host}/api/auth/setpersonal`;
