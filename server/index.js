@@ -6,7 +6,7 @@ const messageRoutes = require('./routes/messageRoute')
 const socket = require('socket.io')
 require('dotenv').config()
 
-const port = 3000;
+const port = 1000;
 
 
 const app = express();
