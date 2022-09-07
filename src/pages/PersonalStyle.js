@@ -19,7 +19,6 @@ const personalStyle = makeStyles({
         borderRadius: "2.5vh",
         userSelect: "none",
         background: "#fff",
-        gap: "1vh",
     },
     AvatarDiv:{
         display: "flex",
@@ -28,6 +27,12 @@ const personalStyle = makeStyles({
     },
     AboutMeDiv: {
         height: "40%",
+        marginTop: "1vh",
+        marginBottom: "1vh"
+    },
+    ProgramsDiv: {
+        marginTop: "1vh",
+        marginBottom: "1vh"
     },
     AboutMe: {
         width: "92.5%",
@@ -56,6 +61,19 @@ const personalStyle = makeStyles({
         border: "none",
         borderRadius: "5px",
         cursor: "pointer",
+    },
+    Programs: {
+        width: "92.5%",
+        height: "16px",
+        background: "#e0dede",
+        justifyContent: "center",
+        display: "flex",
+        padding: "1.5vh",
+        border: "none",
+        outline: "none",
+        borderRadius: "1vh",
+        fontSize: "16px",
+        resize: "none",
     },
     
 })

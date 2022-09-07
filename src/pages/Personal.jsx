@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Typography } from '@mui/material'
+import { List, Typography } from '@mui/material'
 import personalStyle from './PersonalStyle'
 import { RadioGroup, FormControlLabel, Radio, FormLabel } from '@mui/material'
 import Avatar from 'react-avatar-edit'
@@ -30,6 +30,8 @@ const Personal = () => {
     const [preview, setPreview] = useState(user.avatar === "" ? defaultAvatar : user.avatar);
     const [gender, setGender] = useState(user.gender);
     const [aboutme, setAboutMe] = useState(user.aboutme);
+    const [tobeexplore, setToBeExplore] = useState(user.tobeexplore);
+    const [programs, setPrograms] = useState(user.programs);
 
     const onClose = () => {
         setPreview(defaultAvatar);
@@ -48,12 +50,14 @@ const Personal = () => {
 
     const toogleGender = (event) => {
         setGender(event.target.value);
+    }
 
+    const toogleExplore = (event) => {
+        setToBeExplore(event.target.value);
     }
 
     const handleWrite = (e) => {
         setAboutMe(e.target.value);
-
     }
 
     const validate = () => {
@@ -66,12 +70,28 @@ const Personal = () => {
         }
     }
 
+    const handlePrograms = (e) => {
+        setPrograms(e.target.value);
+    }
+
+    const validatePrograms = () => {
+        if (programs.length > 50) {
+            toast.error("University programs cannot have more than 50 characters", toastOptions);
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
     const handleSubmit = async (e) => {
-        if (validate()) {
+        if (validatePrograms() && validate()) {
             const input = {
                 avatar: preview,
                 gender: gender,
-                aboutme: aboutme
+                aboutme: aboutme,
+                tobeexplore: tobeexplore,
+                programs: programs,
             }
             const user = JSON.parse(
                 localStorage.getItem('chat-app-user-logined')
@@ -82,6 +102,7 @@ const Personal = () => {
                 toast.error(data.msg, toastOptions);
             }
             if (data.status === true) {
+                console.log(data.user)
                 localStorage.setItem('chat-app-user-logined', JSON.stringify(data.user));
                 navigate("/chat");
             }
@@ -95,48 +116,75 @@ const Personal = () => {
                     Personal Information
                 </Typography>
 
-                <FormLabel id="demo-row-radio-buttons-group-label">Avatar</FormLabel>
-                <div className={classes.AvatarDiv}>
-                    {/* <AvatarPreview src={preview} alt="Preview" sx={{ width: 150, height: 150 }} /> */}
-                    <AvatarPreview src={preview} alt="Preview" style={{ height: 125, width: 125 }} />
-                    <Avatar
-                        label="Too ugly!"
-                        width={150}
-                        height={150}
-                        onCrop={onCrop}
-                        onClose={onClose}
-                        onBeforeFileLoad={onBeforeFileLoad}
-                    />
-                </div>
+                <List sx={{ height: "54vh", overflow: 'auto' }}>
+                    <FormLabel id="demo-row-radio-buttons-group-label">Avatar:</FormLabel>
+                    <div className={classes.AvatarDiv}>
+                        {/* <AvatarPreview src={preview} alt="Preview" sx={{ width: 150, height: 150 }} /> */}
+                        <AvatarPreview src={preview} alt="Preview" style={{ height: 125, width: 125 }} />
+                        <Avatar
+                            label="Too ugly!"
+                            width={150}
+                            height={150}
+                            onCrop={onCrop}
+                            onClose={onClose}
+                            onBeforeFileLoad={onBeforeFileLoad}
+                        />
+                    </div>
 
-                <FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel>
-                <div>
-                    <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group">
-                        <FormControlLabel value="Male" control={<Radio sx={{
-                            color: '#500979',
-                            '&.Mui-checked': {
+                    <FormLabel id="demo-row-radio-buttons-group-label">Explore Options:</FormLabel>
+                    <div>
+                        <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group">
+                            <Typography sx={{ paddingTop: "8px", marginRight: "40px" }}>{`Allow other users find you in \"Explore\":`} </Typography>
+                            <FormControlLabel value="Yes" control={<Radio sx={{
                                 color: '#500979',
-                            },
-                        }} />} label="Male" onChange={toogleGender} checked={gender === "Male"} />
-                        <FormControlLabel value="Female" control={<Radio sx={{
-                            color: '#500979',
-                            '&.Mui-checked': {
+                                '&.Mui-checked': {
+                                    color: '#500979',
+                                },
+                            }} />} label="Yes" onChange={toogleExplore} checked={tobeexplore === "Yes"} />
+                            <FormControlLabel value="No" control={<Radio sx={{
                                 color: '#500979',
-                            },
-                        }} />} label="Female" onChange={toogleGender} checked={gender === "Female"} />
-                        <FormControlLabel value="Other" control={<Radio sx={{
-                            color: '#500979',
-                            '&.Mui-checked': {
-                                color: '#500979',
-                            },
-                        }} />} label="Other" onChange={toogleGender} checked={gender === "Other"} />
-                    </RadioGroup>
-                </div>
-                <FormLabel id="demo-row-radio-buttons-group-label">About Me:</FormLabel>
-                <div className={classes.AboutMeDiv}>
-                    <textarea type="text" className={classes.AboutMe} value={aboutme} onChange={handleWrite}></textarea>
-                </div>
+                                '&.Mui-checked': {
+                                    color: '#500979',
+                                },
+                            }} />} label="No" onChange={toogleExplore} checked={tobeexplore === "No"} />
+                        </RadioGroup>
+                    </div>
 
+                    <FormLabel id="demo-row-radio-buttons-group-label">Gender:</FormLabel>
+                    <div>
+                        <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group">
+                            <FormControlLabel value="Male" control={<Radio sx={{
+                                color: '#500979',
+                                '&.Mui-checked': {
+                                    color: '#500979',
+                                },
+                            }} />} label="Male" onChange={toogleGender} checked={gender === "Male"} />
+                            <FormControlLabel value="Female" control={<Radio sx={{
+                                color: '#500979',
+                                '&.Mui-checked': {
+                                    color: '#500979',
+                                },
+                            }} />} label="Female" onChange={toogleGender} checked={gender === "Female"} />
+                            <FormControlLabel value="Other" control={<Radio sx={{
+                                color: '#500979',
+                                '&.Mui-checked': {
+                                    color: '#500979',
+                                },
+                            }} />} label="Other" onChange={toogleGender} checked={gender === "Other"} />
+                        </RadioGroup>
+                    </div>
+
+                    <FormLabel id="demo-row-radio-buttons-group-label">University Program: </FormLabel>
+                    <div className={classes.ProgramsDiv}>
+                        <input type="text" className={classes.Programs} value={programs} onChange={handlePrograms}></input>
+                    </div>
+
+                    <FormLabel id="demo-row-radio-buttons-group-label">About Me:</FormLabel>
+                    <div className={classes.AboutMeDiv}>
+                        <textarea type="text" className={classes.AboutMe} value={aboutme} onChange={handleWrite}></textarea>
+                    </div>
+
+                </List>
                 <button className={classes.Button} onClick={handleSubmit}>Submit</button>
 
             </div>
