@@ -16,16 +16,16 @@ const Contacts = ({ contacts, current }) => {
     };
 
     const sex = (sex) => {
-        if(sex === "Male"){
-            return <MaleIcon fontSize='small'/>
+        if (sex === "Male") {
+          return <MaleIcon sx={{ color: "#1F45FC" }} fontSize='small' />
         }
-        else if(sex === "Female"){
-            return <FemaleIcon fontSize='small'/>
+        else if (sex === "Female") {
+          return <FemaleIcon sx={{ color: "#FF0000" }} fontSize='small' />
         }
-        else{
-            return <TransgenderIcon fontSize='small'/>
+        else {
+          return <TransgenderIcon sx={{ color: "#FF00FF" }} fontSize='small' />
         }
-    }
+      }
 
     const addFriend = async (currentUser, targetUser) => {
         const { data } = await axios.post(`${userRequestRoute}/${currentUser}`, {id: targetUser});

@@ -92,7 +92,7 @@ const Personal = () => {
         <div className={classes.Overall}>
             <div className={classes.Box}>
                 <Typography variant='h4' color="#500979">
-                    Useless Information
+                    Personal Information
                 </Typography>
 
                 <FormLabel id="demo-row-radio-buttons-group-label">Avatar</FormLabel>

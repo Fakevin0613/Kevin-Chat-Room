@@ -6,6 +6,12 @@ const ChatStyle = makeStyles({
         width: "100vw",
         display: "grid",
         gridTemplateColumns: "30% 70%",
+    },
+    Small: {
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column",
+        gap: "10px"
     }
 });
 

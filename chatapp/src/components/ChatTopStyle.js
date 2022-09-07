@@ -17,7 +17,24 @@ const ChatTopStyle = makeStyles({
         flexDirection: "row",
         gap: "1vw",
         alignItems: "center",
+    },
+    UserInfo: {
+        display: "flex",
+        flexDirection: "row",
+        gap: "1vw",
+        alignItems: "center",
+        marginBottom: "1vh",
+    },
+    UserInfoSecond: {
+        display: "flex",
+        flexDirection: "row",
+        marginBottom: "1vh",
+        justifyContent: "space-between"
+    },
+    AboutMe: {
+        marginBottom: "2vh",
     }
+    
 });
 
 export default ChatTopStyle;

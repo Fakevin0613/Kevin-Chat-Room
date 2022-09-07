@@ -7,6 +7,7 @@ import MaleIcon from '@mui/icons-material/Male';
 import TransgenderIcon from '@mui/icons-material/Transgender';
 import axios from 'axios';
 import { userAcceptRoute } from '../api/ApiRoutes';
+import { useEffect } from 'react';
 
 const Friends = ({ friends, requests, current, setChatter, setCurrent }) => {
     const classes = FriendsStyle()
@@ -17,17 +18,21 @@ const Friends = ({ friends, requests, current, setChatter, setCurrent }) => {
         setChatter(contact);
     };
 
+    useEffect(()=>{
+        setCurrentSelected(null)
+    },[friends])
+
     const sex = (sex) => {
-        if(sex === "Male"){
-            return <MaleIcon fontSize='small'/>
+        if (sex === "Male") {
+          return <MaleIcon sx={{ color: "#1F45FC" }} fontSize='small' />
         }
-        else if(sex === "Female"){
-            return <FemaleIcon fontSize='small'/>
+        else if (sex === "Female") {
+          return <FemaleIcon sx={{ color: "#FF0000" }} fontSize='small' />
         }
-        else{
-            return <TransgenderIcon fontSize='small'/>
+        else {
+          return <TransgenderIcon sx={{ color: "#FF00FF" }} fontSize='small' />
         }
-    }
+      }
 
     const acceptFriend = async (currentUser, targetUser) => {
         const { data } = await axios.post(`${userAcceptRoute}/${currentUser}`, {id: targetUser});
@@ -89,7 +94,7 @@ const Friends = ({ friends, requests, current, setChatter, setCurrent }) => {
                                     </ListItemAvatar>
                                     <ListItemText
                                         primary={`${friend.username}`}
-                                        secondary={`ToDo`}
+                                        secondary={sex(friend.gender)}
                                     />
                                 </ListItemButton>
 

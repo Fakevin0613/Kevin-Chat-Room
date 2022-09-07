@@ -38,7 +38,7 @@ const ChatBottom = ({ handleSend }) => {
 
     return (
         <div>
-            <Paper position="fixed" sx={{ bgcolor: "white", margin: "2vh", padding: "1px", borderRadius: "30px" }}>
+            <Paper position="fixed" sx={{ bgcolor: "white", margin: "0 2vw 1vh 2vw", padding: "1px", borderRadius: "30px" }}>
                 <div className={classes.Bottom}>
                     <IconButton edge="end" onClick={handleEmojiClick}>
                         <EmojiEmotions />
@@ -58,7 +58,7 @@ const ChatBottom = ({ handleSend }) => {
 
                     <TextField multiline maxRows={3} fullWidth placeholder="Send Message..." value = {message} onChange={handleWrite}/>
 
-                    <IconButton edge="end" onclick={(e) => {sendChat(e)} }>
+                    <IconButton edge="end" onClick={(e) => {sendChat(e)} }>
                         <SendIcon />
                     </IconButton>
                 </div>

@@ -73,7 +73,7 @@ module.exports.getContacts = async (req, res, next) => {
     try {
         const currentUser = await User.findById(req.params.id);
         const users = await User.find({$nor: [{_id: currentUser.friendList }, {_id: currentUser.requestList }]}).select([
-            "email", "username", "avatar", "id", "gender"
+            "email", "username", "avatar", "id", "gender", "aboutme"
         ]);
         return res.json(users);
     } catch (e) {
@@ -85,7 +85,7 @@ module.exports.getFriends = async (req, res, next) => {
     try {
         const currentUser = await User.findById(req.params.id);
         const users = await User.find({$and: [{_id: {$ne: req.params.id}},{ _id: currentUser.friendList }]}).select([
-            "email", "username", "avatar", "id", "gender"
+            "email", "username", "avatar", "id", "gender", "aboutme"
         ]);
         return res.json(users);
     } catch (e) {
@@ -97,7 +97,7 @@ module.exports.getRequests = async (req, res, next) => {
     try {
         const currentUser = await User.findById(req.params.id);
         const users = await User.find({_id: currentUser.requestList}).select([
-            "email", "username", "avatar", "id", "gender"
+            "email", "username", "avatar", "id", "gender", "aboutme"
         ]);
         return res.json(users);
     } catch (e) {
@@ -140,6 +140,26 @@ module.exports.setAccept = async (req, res, next) => {
             { new: true }
         )
         return res.json({ status: true, resultRemove, resultAdd, resultAddBack });
+    } catch (e) {
+        next(e);
+    }
+}
+
+module.exports.setDelete = async (req, res, next) => {
+    try {
+        const targetId = req.body.id;
+        const userId = req.params.id
+        const resultAdd = await User.findOneAndUpdate(
+            {_id: userId},
+            { $pull: {friendList: targetId}},
+            { new: true }
+        )
+        const resultAddBack = await User.findOneAndUpdate(
+            {_id: targetId},
+            { $pull: {friendList: userId}},
+            { new: true }
+        )
+        return res.json({ status: true, resultAdd, resultAddBack });
     } catch (e) {
         next(e);
     }
