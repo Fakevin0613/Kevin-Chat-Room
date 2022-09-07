@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import CheckIcon from '@mui/icons-material/Check';
-import { List, ListItem, ListSubheader, ListItemText, ListItemAvatar, ListItemButton, Typography, Avatar, Divider, IconButton } from '@mui/material'
+import { List, ListItem, ListSubheader, ListItemText, ListItemAvatar, ListItemButton, Avatar, Divider, IconButton } from '@mui/material'
 import FriendsStyle from './FriendsStyle'
 import FemaleIcon from '@mui/icons-material/Female';
 import MaleIcon from '@mui/icons-material/Male';

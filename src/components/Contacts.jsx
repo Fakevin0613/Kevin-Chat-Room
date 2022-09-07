@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import AddIcon from '@mui/icons-material/Add';
-import { List, ListItem, ListSubheader, ListItemText, ListItemAvatar, ListItemButton, Typography, Avatar, Divider, IconButton } from '@mui/material'
+import { List, ListItem, ListSubheader, ListItemText, ListItemAvatar, Avatar, Divider} from '@mui/material'
 import ContactsStyle from './ContactsStyle';
 import axios from 'axios'
 import { userRequestRoute } from '../api/ApiRoutes';

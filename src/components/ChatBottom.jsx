@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Input, Paper, IconButton, Menu, TextField} from '@mui/material'
+import { Paper, IconButton, Menu, TextField} from '@mui/material'
 import ChatBottomStyle from './ChatBottomStyle';
 import Picker from 'emoji-picker-react'
 import SendIcon from '@mui/icons-material/Send';
