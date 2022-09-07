@@ -67,11 +67,11 @@ const Chat = () => {
   }
 
   const [matches, setMatches] = useState(
-    window.matchMedia("(min-width: 1200px) and (min-height: 700px)").matches
+    window.matchMedia("(min-width: 1200px) and (min-height: 650px)").matches
   )
 
   useEffect(() => {
-    window.matchMedia("(min-width: 1200px) and (min-height: 700px)")
+    window.matchMedia("(min-width: 1200px) and (min-height: 650px)")
     .addEventListener('change', e => setMatches(e.matches));
   }, []);
 
