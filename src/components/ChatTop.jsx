@@ -65,7 +65,7 @@ const ChatTop = ({ currentChatter, setCurrent, currentUser }) => {
               }
             }}
           >
-            <Card sx={{ width: "300px", userSelect: "none" }}>
+            <Card sx={{ width: "350px", userSelect: "none" }}>
               <CardContent>
                 <div className={classes.UserInfoSecond}>
                   <div className={classes.UserInfo}>
