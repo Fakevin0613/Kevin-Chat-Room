@@ -15,7 +15,7 @@ app.use(express.json());
 app.use("/api/auth", userRoutes);
 app.use("/api/messages", messageRoutes);
 
-mongoose.connect(process.env.MONGO_URL, {
+mongoose.connect('mongodb+srv://fakevin:Qinyang2_0_0_0@cluster0.pc4qrok.mongodb.net/KevinChatRoom', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => [
@@ -24,13 +24,13 @@ mongoose.connect(process.env.MONGO_URL, {
     console.error(error)
 });
 
-const server = app.listen(process.env.PORT, () => {
-    console.log(`successfully start the app at port ${process.env.PORT}`)
+const server = app.listen(3000, () => {
+    console.log(`successfully start the app at port ${3000}`)
 });
 
 const io = socket(server, {
     cors: {
-        origin: "http://localhost:3001",
+        origin: "http://fakevin666.com",
         credentials: true,
     },
 });
