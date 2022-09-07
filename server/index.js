@@ -6,6 +6,9 @@ const messageRoutes = require('./routes/messageRoute')
 const socket = require('socket.io')
 require('dotenv').config()
 
+const hostname = '208.109.26.191';
+const port = 3000;
+
 
 const app = express();
 
@@ -24,13 +27,13 @@ mongoose.connect('mongodb+srv://fakevin:Qinyang2_0_0_0@cluster0.pc4qrok.mongodb.
     console.error(error)
 });
 
-const server = app.listen(3000, () => {
-    console.log(`successfully start the app at port ${3000}`)
+const server = app.listen(hostname,port, () => {
+    console.log(`successfully start the app at port http://${hostname}:${port}/`)
 });
 
 const io = socket(server, {
     cors: {
-        origin: "http://fakevin666.com",
+        origin: `http://${hostname}:${port}/`,
         credentials: true,
     },
 });
