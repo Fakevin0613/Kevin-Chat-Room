@@ -34,15 +34,15 @@ const ChatTop = ({ currentChatter, setCurrent, currentUser }) => {
   }
 
   const deleteFriend = async (currentUser, targetUser) => {
-    const { data } = await axios.post(`${userDeleteRoute}/${currentUser}`, {id: targetUser});
+    const { data } = await axios.post(`${userDeleteRoute}/${currentUser}`, { id: targetUser });
     if (data.status === false) {
-        console.error(data.error)
+      console.error(data.error)
     }
     if (data.status === true) {
-        localStorage.setItem('chat-app-user-logined', JSON.stringify(data.resultAdd));
-        setCurrent(data.resultAdd)
+      localStorage.setItem('chat-app-user-logined', JSON.stringify(data.resultAdd));
+      setCurrent(data.resultAdd)
     }
-}
+  }
 
   return (
     <>
@@ -74,19 +74,33 @@ const ChatTop = ({ currentChatter, setCurrent, currentUser }) => {
                   </div>
                   {sex(currentChatter.gender)}
                 </div>
+
+                <hr />
+
                 <div className={classes.AboutMe}>
-                  <Typography variant="h6">About Me:</Typography>
+                  <Typography style={{ color: "#808080" }} variant="h6">Program/Major:</Typography>
+                  <Typography sx={{ wordWrap: "break-word", marginTop: "1vh" }}>{currentChatter.programs}</Typography>
+                </div>
+
+
+
+                <div className={classes.AboutMe}>
+                  <Typography style={{ color: "#808080" }} variant="h6">About Me:</Typography>
                   {(currentChatter.aboutme === "") ?
-                    <Typography color="text.secondary" sx={{ wordWrap: "break-word", marginTop: "1vh" }}>This user is too lazy to leave anything...</Typography>
+                    <Typography color="text.Secondary" sx={{ wordWrap: "break-word", marginTop: "1vh" }}>This user is too lazy to leave anything...</Typography>
                     :
                     <Typography sx={{ wordWrap: "break-word", marginTop: "1vh" }}>{currentChatter.aboutme}</Typography>
                   }
                 </div>
 
 
-                <Button color="error" variant="outlined" startIcon={<DeleteIcon />} onClick={(e) => {deleteFriend(currentUser._id, currentChatter._id)}}>
-                  Delete Friend
-                </Button>
+                <hr />
+                <div className={classes.ButtonDiv}>
+                  <Button color="error" variant="outlined" startIcon={<DeleteIcon />} onClick={(e) => { deleteFriend(currentUser._id, currentChatter._id) }}>
+                    Delete Friend
+                  </Button>
+                </div>
+
               </CardContent>
             </Card>
           </Menu>

@@ -33,7 +33,13 @@ const ChatTopStyle = makeStyles({
     },
     AboutMe: {
         marginBottom: "2vh",
-    }
+    },
+    ButtonDiv: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: "2.5vh"
+    },
     
 });
 
