@@ -122,7 +122,7 @@ const Personal = () => {
                         {/* <AvatarPreview src={preview} alt="Preview" sx={{ width: 150, height: 150 }} /> */}
                         <AvatarPreview src={preview} alt="Preview" style={{ height: 125, width: 125 }} />
                         <Avatar
-                            label="Too ugly!"
+                            label="Choose Image"
                             width={150}
                             height={150}
                             onCrop={onCrop}
@@ -132,7 +132,7 @@ const Personal = () => {
                     </div>
 
                     <FormLabel id="demo-row-radio-buttons-group-label">Explore Options:</FormLabel>
-                    <div>
+                    <div className={classes.ExploreDiv}>
                         <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group">
                             <Typography sx={{ paddingTop: "8px", marginRight: "40px" }}>{`Allow other users find you in \"Explore\":`} </Typography>
                             <FormControlLabel value="Yes" control={<Radio sx={{
@@ -151,7 +151,7 @@ const Personal = () => {
                     </div>
 
                     <FormLabel id="demo-row-radio-buttons-group-label">Gender:</FormLabel>
-                    <div>
+                    <div className={classes.GenderDiv}>
                         <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group">
                             <FormControlLabel value="Male" control={<Radio sx={{
                                 color: '#500979',

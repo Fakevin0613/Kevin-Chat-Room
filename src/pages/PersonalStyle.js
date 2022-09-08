@@ -24,15 +24,23 @@ const personalStyle = makeStyles({
         display: "flex",
         justifyContent: "space-around",
         alignItems: "center",
+        marginBottom: "2vh"
     },
     AboutMeDiv: {
         height: "40%",
         marginTop: "1vh",
-        marginBottom: "1vh"
+        marginBottom: "3vh"
+    },
+    ExploreDiv: {
+        marginTop: "3vh",
+        marginBottom: "3vh"
+    },
+    GenderDiv: {
+        marginBottom: "3vh"
     },
     ProgramsDiv: {
         marginTop: "1vh",
-        marginBottom: "1vh"
+        marginBottom: "3vh"
     },
     AboutMe: {
         width: "92.5%",

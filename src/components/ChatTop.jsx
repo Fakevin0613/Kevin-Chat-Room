@@ -78,7 +78,7 @@ const ChatTop = ({ currentChatter, setCurrent, currentUser }) => {
                 <hr />
 
                 <div className={classes.AboutMe}>
-                  <Typography style={{ color: "#808080" }} variant="h6">Program/Major:</Typography>
+                  <Typography style={{ color: "#808080" }} variant="h6">Program:</Typography>
                   <Typography sx={{ wordWrap: "break-word", marginTop: "1vh" }}>{currentChatter.programs}</Typography>
                 </div>
 

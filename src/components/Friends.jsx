@@ -4,9 +4,10 @@ import { List, ListItem, ListSubheader, ListItemText, ListItemAvatar, ListItemBu
 import FriendsStyle from './FriendsStyle'
 import FemaleIcon from '@mui/icons-material/Female';
 import MaleIcon from '@mui/icons-material/Male';
+import CloseIcon from '@mui/icons-material/Close';
 import TransgenderIcon from '@mui/icons-material/Transgender';
 import axios from 'axios';
-import { userAcceptRoute } from '../api/ApiRoutes';
+import { userAcceptRoute, userRejectRoute } from '../api/ApiRoutes';
 import { useEffect } from 'react';
 
 const Friends = ({ friends, requests, current, setChatter, setCurrent }) => {
@@ -18,24 +19,24 @@ const Friends = ({ friends, requests, current, setChatter, setCurrent }) => {
         setChatter(contact);
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         setCurrentSelected(null)
-    },[friends])
+    }, [friends])
 
     const sex = (sex) => {
         if (sex === "Male") {
-          return <MaleIcon sx={{ color: "#1F45FC" }} fontSize='small' />
+            return <MaleIcon sx={{ color: "#1F45FC" }} fontSize='small' />
         }
         else if (sex === "Female") {
-          return <FemaleIcon sx={{ color: "#FF0000" }} fontSize='small' />
+            return <FemaleIcon sx={{ color: "#FF0000" }} fontSize='small' />
         }
         else {
-          return <TransgenderIcon sx={{ color: "#FF00FF" }} fontSize='small' />
+            return <TransgenderIcon sx={{ color: "#FF00FF" }} fontSize='small' />
         }
-      }
+    }
 
     const acceptFriend = async (currentUser, targetUser) => {
-        const { data } = await axios.post(`${userAcceptRoute}/${currentUser}`, {id: targetUser});
+        const { data } = await axios.post(`${userAcceptRoute}/${currentUser}`, { id: targetUser });
         if (data.status === false) {
             console.error(data.error)
         }
@@ -45,11 +46,22 @@ const Friends = ({ friends, requests, current, setChatter, setCurrent }) => {
         }
     }
 
+    const rejectFriend = async (currentUser, targetUser) => {
+        const { data } = await axios.post(`${userRejectRoute}/${currentUser}`, { id: targetUser });
+        if (data.status === false) {
+            console.error(data.error)
+        }
+        if (data.status === true) {
+            localStorage.setItem('chat-app-user-logined', JSON.stringify(data.resultRemove));
+            setCurrent(data.resultRemove)
+        }
+    }
+
     return (
         <>
             <List sx={{ minWidth: "250px", height: "40vh", bgcolor: "#F5F5F5", borderRadius: "1vh", margin: "2vh", overflow: "auto", userSelect: 'none' }}
                 subheader={
-                    <ListSubheader component="div" id="nested-list-subheader" sx={{ fontSize: "22px" }}>
+                    <ListSubheader component="div" id="nested-list-subheader" sx={{ fontSize: "26px" }}>
                         Friends
                     </ListSubheader>
                 }>
@@ -61,9 +73,15 @@ const Friends = ({ friends, requests, current, setChatter, setCurrent }) => {
                         >
                             <ListItem alignItems="flex-start"
                                 secondaryAction={
-                                    <IconButton edge="end" className={classes.addButton} onClick={(e) => {acceptFriend(current, request._id)}}>
-                                        <CheckIcon/>
+                                    <>
+                                    <IconButton sx={{marginRight: "10px"}} edge="end" className={classes.addButton} onClick={(e) => {acceptFriend(current, request._id)}}>
+                                        <CheckIcon sx={{ color: "#1F45FC" }}/>
                                     </IconButton>
+
+                                    <IconButton sx={{marginRight: "10px"}} edge="end" className={classes.addButton} onClick={(e) => {rejectFriend(current, request._id)}}>
+                                        <CloseIcon sx={{ color: "#FF0000" }}/>
+                                    </IconButton>
+                                    </>
                                 }>
                                 <ListItemAvatar>
                                     <Avatar alt={`${request.username}`} src={`${request.avatar}`} />
@@ -77,7 +95,7 @@ const Friends = ({ friends, requests, current, setChatter, setCurrent }) => {
                         </div>
                     )
                 })}
-               
+
                 {friends.map((friend, index) => {
                     return (
                         <div
